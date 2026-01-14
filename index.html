@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>ATARI TETRIS - Ultimate</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- HOME SCREEN -->
+    <div id="home-screen">
+        <div class="logo-box">
+            <div class="title-main">ATARI<br>BLOCKS</div>
+            <div class="title-sub">EXTREME EDITION</div>
+        </div>
+        <button class="btn" id="home-start-btn">START GAME</button>
+        <button class="btn" id="home-scores-btn" style="margin-top: 20px; background: #333; font-size: 14px;">HIGH
+            SCORES</button>
+        <div style="margin-top: 20px; font-size: 10px; color: #666;">© 2026 RETRO WORKS</div>
+    </div>
+
+    <!-- LEADERBOARD SCREEN -->
+    <div id="leaderboard-screen"
+        style="display: none; position: absolute; top:0; left:0; width:100%; height:100%; background:#000; z-index:2500; flex-direction:column; align-items:center; justify-content:center;">
+        <h1 style="color: var(--atari-yellow); margin-bottom: 30px; text-shadow: 2px 2px #d35400;">HIGH SCORES</h1>
+        <div id="scores-list"
+            style="width: 80%; max-width: 400px; max-height: 60vh; overflow-y: auto; text-align: left; font-size: 12px; line-height: 1.8; color: #fff;">
+            <!-- Scores injected here -->
+        </div>
+        <button class="btn" id="lb-back-btn"
+            style="margin-top: 30px; font-size: 12px; padding: 10px 20px;">BACK</button>
+    </div>
+
+    <!-- GAME CONTAINER -->
+    <div id="game-container">
+        <div id="ui-header">
+            <div class="stat-box">
+                <span class="stat-label">SCORE</span>
+                <span class="stat-value" id="score">00000</span>
+            </div>
+            <div class="stat-box">
+                <span class="stat-label">LEVEL</span>
+                <span class="stat-value" id="level">1</span>
+            </div>
+            <div class="stat-box">
+                <span class="stat-label">LINES</span>
+                <span class="stat-value" id="lines">0</span>
+            </div>
+        </div>
+
+        <div id="canvas-wrapper">
+            <canvas id="gameCanvas"></canvas>
+        </div>
+
+        <div id="touch-zone"></div>
+
+        <!-- GAME OVER OVERLAY -->
+        <div id="overlay">
+            <h1 style="color: var(--atari-red); margin-bottom: 20px;">GAME OVER</h1>
+            <div class="stat-value" id="final-score" style="margin-bottom: 20px;">SCORE: 000</div>
+
+            <div id="name-input-container"
+                style="margin-bottom: 20px; display: flex; flex-direction: column; align-items: center;">
+                <p style="font-size: 10px; color: #aaa; margin-bottom: 10px;">ENTER YOUR NAME</p>
+                <input type="text" id="player-name" maxlength="10"
+                    style="background: #222; border: 2px solid var(--atari-orange); color: #fff; padding: 10px; font-family: 'Press Start 2P'; text-align: center; width: 200px; text-transform: uppercase;">
+                <button class="btn" id="submit-score-btn"
+                    style="margin-top: 10px; font-size: 12px; padding: 10px 20px;">SUBMIT</button>
+            </div>
+
+            <div id="game-over-buttons" style="display: none;">
+                <button class="btn" id="restart-btn">TRY AGAIN</button>
+                <button class="btn" id="home-btn"
+                    style="margin-top: 15px; font-size: 12px; padding: 10px 20px; background: #444;">HOME</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

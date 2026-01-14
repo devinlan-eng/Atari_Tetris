@@ -1,0 +1,27 @@
+
+   [90mRunning as [4mdevinlan@gmail.com[24m[39m[90m (Student)[39m
+
+[90m        project:[39m ./
+[90m         domain:[39m atari-tetris-live-v1.surge.sh
+[90m           size:[39m 5 files, 33.5 KB
+(node:23020) [DEP0184] DeprecationWarning: Instantiating Gzip without the 'new' keyword has been deprecated.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+
+
+C:\Users\User\AppData\Local\npm-cache\_npx\23158936acd5c32d\node_modules\surge\lib\middleware\deploy.js:229
+    helpers.log("   Processing Error:".yellow, payload.error.filename).log()
+                                                             ^
+
+TypeError: Cannot read properties of undefined (reading 'filename')
+    at EventEmitter.<anonymous> (C:\Users\User\AppData\Local\npm-cache\_npx\23158936acd5c32d\node_modules\surge\lib\middleware\deploy.js:229:62)
+    at EventEmitter.emit (node:events:508:28)
+    at Request.<anonymous> (C:\Users\User\AppData\Local\npm-cache\_npx\23158936acd5c32d\node_modules\surge-stream\lib\stream.js:215:17)
+    at Request.emit (node:events:520:35)
+    at Request.onRequestError (C:\Users\User\AppData\Local\npm-cache\_npx\23158936acd5c32d\node_modules\request\request.js:877:8)
+    at ClientRequest.emit (node:events:508:28)
+    at emitErrorEvent (node:_http_client:108:11)
+    at TLSSocket.socketOnEnd (node:_http_client:599:5)
+    at TLSSocket.emit (node:events:520:35)
+    at endReadableNT (node:internal/streams/readable:1701:12)
+
+Node.js v24.12.0

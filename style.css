@@ -41,7 +41,10 @@ body {
     position: fixed;
     width: 100%;
     top: 0;
+    top: 0;
     left: 0;
+    /* Add padding to bottom to ensure game doesn't touch the edge */
+    padding-bottom: calc(env(safe-area-inset-bottom) + 3px);
 }
 
 /* 掃描線濾鏡 */
@@ -201,8 +204,7 @@ body::after {
     overflow: hidden;
 
     /* Safe Area for notched phones */
-    /* Safe Area for notched phones + 5px buffer */
-    margin-bottom: calc(env(safe-area-inset-bottom) + 5px);
+    /* Safe Area moved to body padding */
 }
 
 #ui-header {

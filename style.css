@@ -43,9 +43,14 @@ body {
     top: 0;
     top: 0;
     left: 0;
-    /* Safe Area Insets for full collision protection */
-    padding-top: env(safe-area-inset-top);
-    padding-bottom: calc(env(safe-area-inset-bottom) + 3px);
+    top: 0;
+    left: 0;
+
+    /* CRITICAL: Safe Area Layout - The container is the boundary */
+    padding-top: max(env(safe-area-inset-top), 20px);
+    /* Ensure at least 20px top buffer */
+    padding-bottom: max(env(safe-area-inset-bottom) + 5px, 20px);
+    /* Ensure at least 20px bottom buffer */
     padding-left: env(safe-area-inset-left);
     padding-right: env(safe-area-inset-right);
 }
@@ -177,21 +182,17 @@ body::after {
 /* --- GAME CONTAINER --- */
 #game-container {
     position: relative;
-
-    /* Strict 9:16 Aspect Ratio */
-    aspect-ratio: 9 / 16;
-
-    /* Calculate max height: Viewport - Safe Areas - 20px buffer */
-    max-height: calc(100dvh - env(safe-area-inset-top) - env(safe-area-inset-bottom) - 20px);
-    /* Calculate width based on that height to maintain ratio */
-    max-width: calc((100dvh - env(safe-area-inset-top) - env(safe-area-inset-bottom) - 20px) * 9 / 16);
-
+    /* Fit available space naturally */
+    flex: 1;
     width: 100%;
-
-    /* Fallback for wide screens: constrain width to standard mobile size */
-    /* If screen is shorter, max-height handles it. If wider, this handles it. */
-
+    max-width: 600px;
     margin: 0 auto;
+
+    /* Remove strict aspect ratios - let JS resize() handle internal grid ratio */
+    aspect-ratio: auto;
+    max-height: none;
+    min-height: 0;
+    /* Critical for flex scrolling/shrinking */
 
     display: none;
     /* 初始隱藏 */

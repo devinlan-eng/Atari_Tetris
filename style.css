@@ -11,6 +11,12 @@
     /* 動態主題色 */
 }
 
+html {
+    height: 100%;
+    height: 100dvh; /* 使用動態視窗高度，排除手機瀏覽器 UI */
+    overflow: hidden;
+}
+
 body {
     background-color: #111;
     color: #fff;
@@ -22,10 +28,15 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: 100vh;
+    height: 100%;
+    min-height: 100%;
     touch-action: none;
     user-select: none;
     -webkit-user-select: none;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
 }
 
 /* 掃描線濾鏡 */
@@ -158,6 +169,7 @@ body::after {
     width: 100%;
     height: 100%;
     max-width: 600px;
+    max-height: 100%;
     display: none;
     /* 初始隱藏 */
     flex-direction: column;
@@ -166,6 +178,7 @@ body::after {
     box-shadow: 0 0 40px #000 inset;
     transition: background 0.5s;
     /* 關卡切換時背景色平滑過渡 */
+    overflow: hidden;
 }
 
 #ui-header {
@@ -205,6 +218,8 @@ body::after {
     align-items: center;
     padding: 4px;
     background: transparent;
+    min-height: 0; /* 允許 flex 項目縮小 */
+    overflow: hidden;
 }
 
 canvas {
@@ -330,63 +345,85 @@ canvas {
 
 /* 小螢幕（窄手機） */
 @media (max-width: 480px) {
+    html {
+        height: 100dvh; /* 確保使用動態視窗高度 */
+    }
+
     body {
         font-size: 10px;
     }
 
     .logo-box {
-        padding: 20px;
-        margin-bottom: 30px;
+        padding: 15px;
+        margin-bottom: 20px;
         border-width: 4px;
+        max-width: 90%;
     }
 
     .title-main {
-        font-size: 26px;
-        text-shadow: 3px 3px var(--atari-red);
+        font-size: 22px;
+        text-shadow: 2px 2px var(--atari-red);
+        line-height: 1.3;
     }
 
     .title-sub {
-        font-size: 10px;
+        font-size: 9px;
         letter-spacing: 2px;
     }
 
     .btn {
-        padding: 12px 20px;
-        font-size: 12px;
-        box-shadow: 0 4px #666;
+        padding: 10px 16px;
+        font-size: 11px;
+        box-shadow: 0 3px #666;
+        margin: 5px 0;
     }
 
     #ui-header {
-        padding: 6px 0;
+        padding: 5px 0;
+        min-height: auto;
     }
 
     .stat-label {
-        font-size: 8px;
+        font-size: 7px;
+        margin-bottom: 2px;
     }
 
     .stat-value {
-        font-size: 12px;
+        font-size: 10px;
+    }
+
+    #canvas-wrapper {
+        padding: 2px;
     }
 }
 
 /* 一般手機 / 小平板 */
 @media (min-width: 481px) and (max-width: 768px) {
+    html {
+        height: 100dvh;
+    }
+
     .logo-box {
-        padding: 30px;
-        margin-bottom: 40px;
+        padding: 25px;
+        margin-bottom: 30px;
+        max-width: 85%;
     }
 
     .title-main {
-        font-size: 32px;
+        font-size: 28px;
     }
 
     .title-sub {
-        font-size: 12px;
+        font-size: 11px;
     }
 
     .btn {
-        padding: 16px 28px;
-        font-size: 14px;
+        padding: 14px 24px;
+        font-size: 13px;
+    }
+
+    #ui-header {
+        padding: 7px 0;
     }
 }
 

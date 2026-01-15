@@ -721,6 +721,18 @@ function submitScore() {
 }
 
 window.addEventListener('resize', resize);
-window.addEventListener('orientationchange', () => setTimeout(resize, 200));
+window.addEventListener('orientationchange', () => setTimeout(resize, 300));
+
+// 手機瀏覽器地址列隱藏/顯示時重新計算（使用 visualViewport API）
+if (window.visualViewport) {
+    window.visualViewport.addEventListener('resize', () => {
+        setTimeout(resize, 100);
+    });
+}
+
+// 確保頁面載入完成後執行一次 resize（特別針對手機）
+window.addEventListener('load', () => {
+    setTimeout(resize, 200);
+});
 
 Input.setup();

@@ -17,7 +17,8 @@
 
 html {
     height: 100%;
-    height: 100dvh; /* 使用動態視窗高度，排除手機瀏覽器 UI */
+    height: 100dvh;
+    /* 使用動態視窗高度，排除手機瀏覽器 UI */
     overflow: hidden;
 }
 
@@ -170,10 +171,25 @@ body::after {
 /* --- GAME CONTAINER --- */
 #game-container {
     position: relative;
+
+    /* Strict 9:16 Aspect Ratio Logic */
     width: 100%;
     height: 100%;
-    max-width: 600px;
-    max-height: 100%;
+    /* Will be constrained by max-height/width */
+    aspect-ratio: 9 / 16;
+
+    /* Contain within Viewport */
+    max-height: 100dvh;
+    max-width: calc(100dvh * 9 / 16);
+    /* Ensure width doesn't exceed 9:16 based on height */
+
+    /* Or if screen is wide */
+    max-width: 100%;
+    /* Fallback */
+
+    margin: auto;
+    /* Center in flex body */
+
     display: none;
     /* 初始隱藏 */
     flex-direction: column;
@@ -183,6 +199,9 @@ body::after {
     transition: background 0.5s;
     /* 關卡切換時背景色平滑過渡 */
     overflow: hidden;
+
+    /* Safe Area for notched phones */
+    margin-bottom: env(safe-area-inset-bottom);
 }
 
 #ui-header {
@@ -222,7 +241,8 @@ body::after {
     align-items: center;
     padding: 4px;
     background: transparent;
-    min-height: 0; /* 允許 flex 項目縮小 */
+    min-height: 0;
+    /* 允許 flex 項目縮小 */
     overflow: hidden;
 }
 
@@ -350,7 +370,8 @@ canvas {
 /* 小螢幕（窄手機） */
 @media (max-width: 480px) {
     html {
-        height: 100dvh; /* 確保使用動態視窗高度 */
+        height: 100dvh;
+        /* 確保使用動態視窗高度 */
     }
 
     body {

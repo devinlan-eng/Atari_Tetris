@@ -15,44 +15,28 @@
     /* 動態主題色 */
 }
 
-html {
+html,
+body {
+    /* Nuclear Option: Fixed viewport, no scroll */
+    position: fixed;
+    width: 100%;
     height: 100%;
-    height: 100dvh;
-    /* 使用動態視窗高度，排除手機瀏覽器 UI */
     overflow: hidden;
+    margin: 0;
+    padding: 0;
+    background-color: #111;
 }
 
 body {
-    background-color: #111;
     color: #fff;
-    margin: 0;
-    padding: 0;
     font-family: 'Press Start 2P', cursive;
-    overflow: hidden;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: 100%;
-    min-height: 100%;
     touch-action: none;
     user-select: none;
     -webkit-user-select: none;
-    position: fixed;
-    width: 100%;
-    top: 0;
-    top: 0;
-    left: 0;
-    top: 0;
-    left: 0;
-
-    /* CRITICAL: Safe Area Layout - The container is the boundary */
-    padding-top: max(env(safe-area-inset-top), 20px);
-    /* Ensure at least 20px top buffer */
-    padding-bottom: max(env(safe-area-inset-bottom) + 5px, 20px);
-    /* Ensure at least 20px bottom buffer */
-    padding-left: env(safe-area-inset-left);
-    padding-right: env(safe-area-inset-right);
 }
 
 /* 掃描線濾鏡 */
@@ -181,31 +165,35 @@ body::after {
 
 /* --- GAME CONTAINER --- */
 #game-container {
-    position: relative;
-    /* Fit available space naturally */
-    flex: 1;
-    width: 100%;
+    /* Absolute Positioning Strategy */
+    position: absolute;
+
+    /* Pin to Safe Areas + Buffer */
+    top: calc(env(safe-area-inset-top) + 20px);
+    bottom: calc(env(safe-area-inset-bottom) + 10px);
+    left: 10px;
+    right: 10px;
+
+    /* Desktop constraint */
     max-width: 600px;
     margin: 0 auto;
+    /* Horizontal Center */
 
-    /* Remove strict aspect ratios - let JS resize() handle internal grid ratio */
+    /* Reset others */
+    width: auto;
+    height: auto;
     aspect-ratio: auto;
-    max-height: none;
-    min-height: 0;
-    /* Critical for flex scrolling/shrinking */
+    flex: none;
 
     display: none;
     /* 初始隱藏 */
     flex-direction: column;
     background: var(--theme-color);
-    /* 使用變數 */
     box-shadow: 0 0 40px #000 inset;
     transition: background 0.5s;
-    /* 關卡切換時背景色平滑過渡 */
     overflow: hidden;
-
-    /* Rounded corners to match modern screens */
     border-radius: 8px;
+    border: 2px solid #222;
 }
 
 #ui-header {

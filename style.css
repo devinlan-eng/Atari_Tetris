@@ -201,7 +201,8 @@ body::after {
     overflow: hidden;
 
     /* Safe Area for notched phones */
-    margin-bottom: env(safe-area-inset-bottom);
+    /* Safe Area for notched phones + 5px buffer */
+    margin-bottom: calc(env(safe-area-inset-bottom) + 5px);
 }
 
 #ui-header {

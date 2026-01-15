@@ -177,11 +177,19 @@ body::after {
 /* --- GAME CONTAINER --- */
 #game-container {
     position: relative;
+
+    /* Strict 9:16 Aspect Ratio */
+    aspect-ratio: 9 / 16;
+
+    /* Calculate max height: Viewport - Safe Areas - 20px buffer */
+    max-height: calc(100dvh - env(safe-area-inset-top) - env(safe-area-inset-bottom) - 20px);
+    /* Calculate width based on that height to maintain ratio */
+    max-width: calc((100dvh - env(safe-area-inset-top) - env(safe-area-inset-bottom) - 20px) * 9 / 16);
+
     width: 100%;
-    /* Use flex growth instead of fixed aspect ratio */
-    flex: 1;
-    max-width: 600px;
-    /* Desktop constraint */
+
+    /* Fallback for wide screens: constrain width to standard mobile size */
+    /* If screen is shorter, max-height handles it. If wider, this handles it. */
 
     margin: 0 auto;
 

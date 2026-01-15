@@ -180,8 +180,8 @@ function resize() {
     const w = wrapper.clientWidth;
     const h = wrapper.clientHeight;
 
-    const sizeW = Math.floor((w - 4) / COLS);
-    const sizeH = Math.floor((h - 4) / ROWS);
+    const sizeW = Math.floor((w - 8) / COLS);
+    const sizeH = Math.floor((h - 8) / ROWS);
 
     BLOCK_SIZE = Math.min(sizeW, sizeH);
 

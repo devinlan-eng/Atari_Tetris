@@ -182,8 +182,8 @@ body::after {
     aspect-ratio: 9 / 16;
 
     /* Contain within Viewport */
-    max-height: 100dvh;
-    max-width: calc(100dvh * 9 / 16);
+    max-height: 94dvh;
+    max-width: calc(94dvh * 9 / 16);
     /* Ensure width doesn't exceed 9:16 based on height */
 
     /* Or if screen is wide */

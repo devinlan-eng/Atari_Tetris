@@ -5,6 +5,7 @@
 }
 
 :root {
+    /* === 配色系統 === */
     --bg-color: #0c0c0c;
     --atari-orange: #d35400;
     --atari-yellow: #f1c40f;
@@ -12,15 +13,57 @@
     --atari-wood: #4e342e;
     --atari-black: #050505;
     --theme-color: #4e342e;
-    /* 動態主題色 */
+
+    /* === 間距系統 === */
+    --space-unit: clamp(4px, 1vw, 8px);
+    --space-xs: calc(var(--space-unit) * 1);
+    --space-sm: calc(var(--space-unit) * 2);
+    --space-md: calc(var(--space-unit) * 3);
+    --space-lg: calc(var(--space-unit) * 4);
+    --space-xl: calc(var(--space-unit) * 6);
+
+    /* === 字體系統 === */
+    --font-size-xs: clamp(7px, 1.5vw, 9px);
+    --font-size-sm: clamp(9px, 2vw, 12px);
+    --font-size-md: clamp(11px, 2.5vw, 14px);
+    --font-size-lg: clamp(14px, 3vw, 18px);
+    --font-size-xl: clamp(18px, 4vw, 24px);
+    --font-size-2xl: clamp(22px, 5vw, 40px);
+    --font-size-3xl: clamp(28px, 6vw, 46px);
+
+    /* === 佈局系統 === */
+    --game-max-width: 600px;
+    --game-max-width-desktop: 720px;
+    --ui-header-height: clamp(40px, 8vh, 60px);
+    --button-min-size: 44px;
+
+    /* === 安全區域 (Safari 兼容) === */
+    --safe-top: 0px;
+    --safe-top: env(safe-area-inset-top, 0px);
+    --safe-bottom: 0px;
+    --safe-bottom: env(safe-area-inset-bottom, 0px);
+    --safe-left: 0px;
+    --safe-left: env(safe-area-inset-left, 0px);
+    --safe-right: 0px;
+    --safe-right: env(safe-area-inset-right, 0px);
 }
 
-html,
+html {
+    /* Safari 兼容性: 多層 fallback */
+    height: 100vh;
+    /* 基礎 fallback */
+    height: -webkit-fill-available;
+    /* Safari iOS 專用 */
+    height: 100dvh;
+    /* 現代瀏覽器 (Safari 15.4+) */
+}
+
 body {
-    /* Nuclear Option: Fixed viewport, no scroll */
-    position: fixed;
+    /* Safari 兼容性: 避免使用 position: fixed 在根元素 */
     width: 100%;
-    height: 100%;
+    height: 100vh;
+    height: -webkit-fill-available;
+    height: 100dvh;
     overflow: hidden;
     margin: 0;
     padding: 0;
@@ -138,7 +181,7 @@ body::after {
 }
 
 .title-main {
-    font-size: 40px;
+    font-size: var(--font-size-3xl);
     color: var(--atari-yellow);
     text-shadow: 4px 4px var(--atari-red);
     margin-bottom: 20px;
@@ -147,7 +190,7 @@ body::after {
 }
 
 .title-sub {
-    font-size: 14px;
+    font-size: var(--font-size-md);
     color: #ccc;
     letter-spacing: 4px;
     text-align: center;
@@ -168,22 +211,15 @@ body::after {
     /* Absolute Positioning Strategy */
     position: absolute;
 
-    /* Pin to Safe Areas + Buffer */
-    top: calc(env(safe-area-inset-top) + 20px);
-    bottom: calc(env(safe-area-inset-bottom) + 10px);
-    left: 10px;
-    right: 10px;
+    /* Pin to Safe Areas + Buffer (使用 CSS 變數) */
+    top: calc(var(--safe-top) + var(--space-md));
+    bottom: calc(var(--safe-bottom) + var(--space-sm));
+    left: calc(var(--safe-left) + var(--space-sm));
+    right: calc(var(--safe-right) + var(--space-sm));
 
     /* Desktop constraint */
-    max-width: 600px;
+    max-width: var(--game-max-width);
     margin: 0 auto;
-    /* Horizontal Center */
-
-    /* Reset others */
-    width: auto;
-    height: auto;
-    aspect-ratio: auto;
-    flex: none;
 
     display: none;
     /* 初始隱藏 */
@@ -215,13 +251,13 @@ body::after {
 }
 
 .stat-label {
-    font-size: 9px;
+    font-size: var(--font-size-sm);
     color: #888;
     margin-bottom: 4px;
 }
 
 .stat-value {
-    font-size: 14px;
+    font-size: var(--font-size-md);
     color: var(--atari-yellow);
 }
 
@@ -281,13 +317,14 @@ canvas {
     background: var(--atari-orange);
     border: 4px solid #fff;
     color: #fff;
-    padding: 20px 40px;
+    padding: var(--space-md) var(--space-xl);
     font-family: 'Press Start 2P', cursive;
-    font-size: 18px;
+    font-size: var(--font-size-lg);
     cursor: pointer;
     text-transform: uppercase;
     box-shadow: 0 6px #888;
     transition: transform 0.1s;
+    min-height: var(--button-min-size);
 }
 
 .btn:active {
@@ -362,8 +399,9 @@ canvas {
 /* 小螢幕（窄手機） */
 @media (max-width: 480px) {
     html {
+        height: 100vh;
+        height: -webkit-fill-available;
         height: 100dvh;
-        /* 確保使用動態視窗高度 */
     }
 
     body {
@@ -417,6 +455,8 @@ canvas {
 /* 一般手機 / 小平板 */
 @media (min-width: 481px) and (max-width: 768px) {
     html {
+        height: 100vh;
+        height: -webkit-fill-available;
         height: 100dvh;
     }
 
